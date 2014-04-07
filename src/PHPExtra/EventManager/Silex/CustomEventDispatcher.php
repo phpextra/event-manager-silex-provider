@@ -34,19 +34,31 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
         $event->setDispatcher($this);
         $event->setName($eventName);
 
-        if(!$this->hasListeners($eventName)){
+        $skip = false;
+        $silexEvent = $this->createProxyEvent($eventName, $event);
 
+        if($this->hasListeners($eventName)){
+            $this->doDispatch($this->getListeners($eventName), $eventName, $event);
         }
 
-        if(($silexEvent = $this->createProxyEvent($eventName, $event)) !== null){
+        if($silexEvent){
             $this->eventManager->trigger($silexEvent);
         }
 
-        $this->doDispatch($this->getListeners($eventName), $eventName, $event);
+        if($skip === true){
+            return $event;
+        }
 
         return $event;
     }
 
+    /**
+     * Create proxy event for given Symfony dispatcher event
+     *
+     * @param string $name
+     * @param Event $event
+     * @return SilexEvent
+     */
     protected function createProxyEvent($name, Event $event)
     {
         $silexEvent = null;
@@ -59,7 +71,7 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
             case KernelEvents::RESPONSE:
             case KernelEvents::CONTROLLER:
                 if($event instanceof \Symfony\Component\HttpKernel\Event\FilterControllerEvent){
-                    $silexEvent = new ControllerEvent();
+                    $silexEvent = new ControllerEvent($event);
                 }
                 break;
             case KernelEvents::EXCEPTION:
@@ -67,7 +79,7 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
             case KernelEvents::TERMINATE:
             case KernelEvents::VIEW:
             default:
-                $silexEvent = new SilexEvent($name);
+                $silexEvent = new SilexEvent($event);
 
         }
         var_dump($name, get_class($event));

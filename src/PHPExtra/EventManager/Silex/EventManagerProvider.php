@@ -29,10 +29,10 @@ class EventManagerProvider implements ServiceProviderInterface
             return $em;
         });
 
-//        $app->extend('dispatcher', function(CustomEventDispatcher $dispatcher, Application $app){
-//            $dispatcher->setEventManager($app['event_manager']);
-//            return $dispatcher;
-//        });
+        $app->extend('dispatcher', function(CustomEventDispatcher $dispatcher, Application $app){
+            $dispatcher->setEventManager($app['event_manager']);
+            return $dispatcher;
+        });
     }
 
     /**

@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\Event as SymfonyEvent;
  *
  * @author Jacek Kobus <kobus.jacek@gmail.com>
  */
-class SilexEvent implements EventInterface, CancellableEventInterface
+class SilexEvent implements CancellableEventInterface
 {
     /**
      * @var string
@@ -42,7 +42,7 @@ class SilexEvent implements EventInterface, CancellableEventInterface
      *
      * @return $this
      */
-    public function setSymfonyEvent($symfonyEvent)
+    protected function setSymfonyEvent($symfonyEvent)
     {
         $this->symfonyEvent = $symfonyEvent;
 

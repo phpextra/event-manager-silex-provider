@@ -1,7 +1,6 @@
 <?php
 
 namespace PHPExtra\EventManager\Silex\Event;
-use PHPExtra\EventManager\Event\EventInterface;
 
 /**
  * The SilexEvent class
