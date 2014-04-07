@@ -1,0 +1,22 @@
+{
+    "name": "phpextra/event-manager-silex-provider",
+    "authors": [
+        {
+            "name": "Jacek Kobus",
+            "email": "kobus.jacek@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "PHPExtra": "./src"
+        }
+    },
+    "require": {
+        "phpextra/event-manager": "~1.0",
+        "silex/silex": "~1.2"
+    },
+    "require-dev": {
+        "phpextra/qa-tools": "~1.0"
+    }
+}
