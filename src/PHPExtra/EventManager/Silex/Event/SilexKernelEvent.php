@@ -5,6 +5,11 @@ namespace PHPExtra\EventManager\Silex\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 
+/**
+ * The SilexKernelEvent class
+ *
+ * @author Jacek Kobus <kobus.jacek@gmail.com>
+ */
 class SilexKernelEvent extends SilexEvent
 {
     /**

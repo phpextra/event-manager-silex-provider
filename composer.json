@@ -17,6 +17,7 @@
         "silex/silex": "~1.2"
     },
     "require-dev": {
-        "phpextra/qa-tools": "~1.0"
+        "phpextra/qa-tools": "~1.0",
+        "symfony/browser-kit": "~2.3"
     }
 }

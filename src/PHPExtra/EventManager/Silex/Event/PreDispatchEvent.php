@@ -5,11 +5,11 @@ namespace PHPExtra\EventManager\Silex\Event;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
- * The ControllerEvent class
+ * The PreDispatchEvent class
  *
  * @author Jacek Kobus <kobus.jacek@gmail.com>
  */
-class ControllerEvent extends SilexKernelEvent
+class PreDispatchEvent extends SilexKernelEvent
 {
     /**
      * @return callable

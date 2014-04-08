@@ -23,14 +23,21 @@ class EventManagerProvider implements ServiceProviderInterface
 
         $app['event_manager'] = $app->share(function(Application $app){
             $em = new EventManager();
-            if($app->offsetGet('logger') !== null){
+            if($app['logger'] !== null){
                 $em->setLogger($app['logger']);
             }
             return $em;
         });
 
+        $app['event_manager.proxy_mapper'] = $app->share(function(Application $app){
+            return new ProxyMapper();
+        });
+
         $app->extend('dispatcher', function(CustomEventDispatcher $dispatcher, Application $app){
-            $dispatcher->setEventManager($app['event_manager']);
+            $dispatcher
+                ->setProxyMapper($app['event_manager.proxy_mapper'])
+                ->setEventManager($app['event_manager'])
+            ;
             return $dispatcher;
         });
     }

@@ -2,16 +2,23 @@
 
 namespace PHPExtra\EventManager\Silex\Event;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
 /**
- * The ControllerEvent class
+ * The ControllerResultEvent class
  *
  * @author Jacek Kobus <kobus.jacek@gmail.com>
  */
-class ControllerResultEvent extends SilexKernelEvent
+class PostDispatchEvent extends SilexKernelEvent
 {
+    /**
+     * @param GetResponseForControllerResultEvent $event
+     */
+    function __construct(GetResponseForControllerResultEvent $event)
+    {
+        parent::__construct($event);
+    }
+
     /**
      * @return callable
      */
