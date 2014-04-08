@@ -1,2 +1,6 @@
 .idea
 vendor
+build/*
+!build/phpcs.xml
+!build/phpmd.xml
+!build/sami-config.xml
