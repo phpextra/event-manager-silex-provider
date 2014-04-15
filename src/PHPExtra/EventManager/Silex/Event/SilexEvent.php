@@ -1,8 +1,8 @@
 <?php
 
 namespace PHPExtra\EventManager\Silex\Event;
+
 use PHPExtra\EventManager\Event\CancellableEventInterface;
-use PHPExtra\EventManager\Event\EventInterface;
 use Symfony\Component\EventDispatcher\Event as SymfonyEvent;
 
 /**
@@ -24,15 +24,15 @@ class SilexEvent implements CancellableEventInterface
 
     /**
      * @param SymfonyEvent $event
-     * @param string $name
+     * @param string       $name
      */
     function __construct(SymfonyEvent $event = null, $name = null)
     {
-        if($name !== null){
+        if ($name !== null) {
             $this->setName($name);
         }
 
-        if($event !== null){
+        if ($event !== null) {
             $this->setSymfonyEvent($event);
         }
     }
@@ -91,6 +91,7 @@ class SilexEvent implements CancellableEventInterface
     public function setIsCancelled()
     {
         $this->getSymfonyEvent()->stopPropagation();
+
         return $this;
     }
 }

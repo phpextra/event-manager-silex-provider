@@ -35,7 +35,7 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
 
         $silexEvent = $this->getProxyMapper()->createProxyEvent($event);
 
-        if($silexEvent){
+        if ($silexEvent) {
             $this->eventManager->trigger($silexEvent);
         }
 
@@ -68,6 +68,7 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
     public function setEventManager(EventManager $manager)
     {
         $this->eventManager = $manager;
+
         return $this;
     }
 }

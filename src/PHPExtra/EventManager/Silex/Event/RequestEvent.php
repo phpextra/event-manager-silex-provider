@@ -1,6 +1,7 @@
 <?php
 
 namespace PHPExtra\EventManager\Silex\Event;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -13,7 +14,7 @@ class RequestEvent extends SilexKernelEvent
 {
     /**
      * @param GetResponseEvent $event
-     * @param string             $name
+     * @param string           $name
      */
     function __construct(GetResponseEvent $event = null, $name = null)
     {
@@ -26,9 +27,10 @@ class RequestEvent extends SilexKernelEvent
     public function getResponse()
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof GetResponseEvent){
+        if ($event instanceof GetResponseEvent) {
             return $event->getResponse();
         }
+
         return null;
     }
 
@@ -40,9 +42,10 @@ class RequestEvent extends SilexKernelEvent
     public function hasResponse()
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof GetResponseEvent){
+        if ($event instanceof GetResponseEvent) {
             return $event->hasResponse();
         }
+
         return null;
     }
 

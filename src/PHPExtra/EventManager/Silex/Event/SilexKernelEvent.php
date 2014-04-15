@@ -14,7 +14,7 @@ class SilexKernelEvent extends SilexEvent
 {
     /**
      * @param KernelEvent $event
-     * @param string        $name
+     * @param string      $name
      */
     function __construct(KernelEvent $event = null, $name = null)
     {
@@ -27,9 +27,10 @@ class SilexKernelEvent extends SilexEvent
     public function getRequest()
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof KernelEvent){
+        if ($event instanceof KernelEvent) {
             return $event->getRequest();
         }
+
         return null;
     }
 
@@ -39,9 +40,10 @@ class SilexKernelEvent extends SilexEvent
     public function getRequestType()
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof KernelEvent){
+        if ($event instanceof KernelEvent) {
             return $event->getRequestType();
         }
+
         return null;
     }
 } 

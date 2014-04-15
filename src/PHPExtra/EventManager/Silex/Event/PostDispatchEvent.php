@@ -25,22 +25,25 @@ class PostDispatchEvent extends SilexKernelEvent
     public function getControllerResult()
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof GetResponseForControllerResultEvent){
+        if ($event instanceof GetResponseForControllerResultEvent) {
             return $event->getControllerResult();
         }
+
         return null;
     }
 
     /**
      * @param $result
+     *
      * @return $this
      */
     public function setControllerResult($result)
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof GetResponseForControllerResultEvent){
+        if ($event instanceof GetResponseForControllerResultEvent) {
             $event->setControllerResult($result);
         }
+
         return $this;
     }
 } 

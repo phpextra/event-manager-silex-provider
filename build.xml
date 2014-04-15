@@ -194,7 +194,7 @@
     </target>
 
     <target name="phpcs" depends="phpcs-config" description="Find coding standard violations using PHP_CodeSniffer">
-        <exec executable="${bindir}/phpcs${bin-extension}" failonerror="true">
+        <exec executable="${bindir}/phpcs${bin-extension}" failonerror="false">
             <arg value="--standard=${basedir}/build/phpcs.xml" />
             <arg value="--extensions=php" />
             <arg value="--ignore=Autoload.php" />

@@ -17,9 +17,10 @@ class PreDispatchEvent extends SilexKernelEvent
     public function getController()
     {
         $event = $this->getSymfonyEvent();
-        if($event instanceof FilterControllerEvent){
+        if ($event instanceof FilterControllerEvent) {
             return $event->getController();
         }
+
         return null;
     }
 } 
