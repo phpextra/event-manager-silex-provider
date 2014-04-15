@@ -23,6 +23,11 @@ class EventManagerProvider implements ServiceProviderInterface
 
         $app['event_manager'] = $app->share(function(Application $app){
             $em = new EventManager();
+
+            if($app['debug'] == true){
+                $em->setThrowExceptions(true);
+            }
+
             if($app['logger'] !== null){
                 $em->setLogger($app['logger']);
             }

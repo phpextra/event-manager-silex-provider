@@ -1,5 +1,6 @@
 {
     "name": "phpextra/event-manager-silex-provider",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jacek Kobus",

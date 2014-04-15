@@ -61,4 +61,31 @@ Every class can now be a listener.
 
     ...
 
+##Exception handling
 
+Exceptions that will occur during an event are suppressed in production mode.
+In development, the event manager will break the event loop and re-throw all exceptions.
+
+
+    $em->setThrowExceptions(false); // supress exceptions and continue event loop
+
+
+##Contributing
+
+All code contributions must go through a pull request.
+Fork the project, create a feature branch, and send me a pull request.
+To ensure a consistent code base, you should make sure the code follows
+the [coding standards](http://symfony.com/doc/2.0/contributing/code/standards.html).
+If you would like to help take a look at the list of issues.
+
+##Requirements
+
+See **composer.json** for a full list of dependencies.
+
+##Authors
+
+Jacek Kobus - <kobus.jacek@gmail.com>
+
+## License information
+
+    See the file LICENSE.txt for copying permission.
