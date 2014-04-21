@@ -18,4 +18,17 @@ class ResponseEvent extends SilexKernelEvent
     {
         parent::__construct($event);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \RuntimeException
+     */
+    public function getResponse()
+    {
+        $event = $this->getSymfonyEvent();
+        if($event instanceof FilterResponseEvent){
+            return $event->getResponse();
+        }
+        throw new \RuntimeException(sprintf('Unexpected event type: %s (expecting %s)', get_class($event), 'FilterResponseEvent'));
+    }
 }
