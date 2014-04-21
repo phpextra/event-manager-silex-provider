@@ -35,6 +35,19 @@ class RequestEvent extends SilexKernelEvent
     }
 
     /**
+     * @param Response $response
+     * @return $this
+     */
+    public function setResponse(Response $response)
+    {
+        $event = $this->getSymfonyEvent();
+        if($event instanceof GetResponseEvent){
+            $event->setResponse($response);
+        }
+        return $this;
+    }
+
+    /**
      * Null will be returned only if given sf event is not an instance of GetResponseEvent
      *
      * @return bool|null
