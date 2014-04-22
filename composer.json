@@ -13,6 +13,11 @@
             "PHPExtra": "./src"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
     "require": {
         "phpextra/event-manager": "~1.0",
         "silex/silex": "~1.2"
