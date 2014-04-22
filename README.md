@@ -67,7 +67,7 @@ Exceptions that will occur during an event are suppressed in production mode.
 In development, the event manager will break the event loop and re-throw all exceptions.
 
 
-    $em->setThrowExceptions(false); // supress exceptions and continue event loop
+    $em->setThrowExceptions(false); // suppress exceptions and continue event loop
 
 
 ##Contributing
