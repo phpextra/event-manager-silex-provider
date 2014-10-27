@@ -2,11 +2,10 @@
 
 namespace fixtures;
 
-use PHPExtra\EventManager\Event\EventInterface;
 use PHPExtra\EventManager\EventManagerInterface;
 use PHPExtra\EventManager\Listener\AnonymousListener;
 use PHPExtra\EventManager\Silex\Event\SilexEvent;
-use PHPExtra\EventManager\Silex\EventManagerProvider;
+use PHPExtra\EventManager\Silex\EventManagerServiceProvider;
 use Silex\Application;
 use Silex\WebTestCase;
 use Symfony\Component\HttpKernel\HttpKernel;
@@ -27,7 +26,7 @@ class EventManagerProviderTest extends WebTestCase
     {
         $app = new Application(array('debug' => true));
         $app['exception_handler']->disable();
-        $app->register(new EventManagerProvider());
+        $app->register(new EventManagerServiceProvider());
         $app->get('/', function(Application $app){
             return 'ok';
         });

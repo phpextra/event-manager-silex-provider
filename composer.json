@@ -13,17 +13,12 @@
             "PHPExtra": "./src"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    },
     "require": {
-        "phpextra/event-manager": "~1.0",
+        "phpextra/event-manager": "~2.0@dev",
         "silex/silex": "~1.2"
     },
     "require-dev": {
-        "phpextra/qa-tools": "~1.0",
-        "symfony/browser-kit": "~2.3"
+        "phpunit/phpunit": "~4.2",
+        "symfony/browser-kit": "~2.5"
     }
 }
