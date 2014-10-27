@@ -18,6 +18,7 @@
         "silex/silex": "~1.2"
     },
     "require-dev": {
+        "mockery/mockery": "0.9.2",
         "phpunit/phpunit": "~4.2",
         "symfony/browser-kit": "~2.5"
     }
