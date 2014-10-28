@@ -3,6 +3,7 @@
 namespace PHPExtra\EventManager\Silex;
 
 use PHPExtra\EventManager\EventManager;
+use Psr\Log\NullLogger;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -24,7 +25,12 @@ class EventManagerServiceProvider implements ServiceProviderInterface
         $app['event_manager'] = $app->share(function (Application $app) {
 
             $em = new ProfilableEventManager();
-            $em->setLogger($app['logger']);
+
+            if ($app['logger'] !== null) {
+                $em->setLogger($app['logger']);
+            }else{
+                $em->setLogger(new NullLogger());
+            }
 
             if($app['debug']){
                 $em
