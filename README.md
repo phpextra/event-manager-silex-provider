@@ -66,12 +66,15 @@ $em->addListener($app['mailer']);
 ##Exception handling
 
 Exceptions that will occur during an event are suppressed in production mode.
-In development, the event manager will break the event loop and re-throw all exceptions.
-
+In development, the event manager will break the event loop and throw an exception.
 
 ```php
 $em->setThrowExceptions(false); // suppress exceptions and continue event loop
 ```
+
+##Profiling (Symfony stopwatch)
+
+Stopwatch is enabled when debug mode is on. In production EventManager uses NullStopwatch.
 
 ##Contributing
 
@@ -91,4 +94,4 @@ Jacek Kobus - <kobus.jacek@gmail.com>
 
 ## License information
 
-    See the file LICENSE.txt for copying permission.
+See the file LICENSE.txt for copying permission.

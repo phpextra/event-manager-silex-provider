@@ -25,6 +25,9 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
      */
     protected $proxyMapper;
 
+    /**
+     * {@inheritdoc}
+     */
     public function dispatch($eventName, Event $event = null)
     {
         if (null === $event) {

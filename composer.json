@@ -15,6 +15,7 @@
     },
     "require": {
         "phpextra/event-manager": "~2.0@dev",
+        "symfony/stopwatch": "~2.5",
         "silex/silex": "~1.2"
     },
     "require-dev": {

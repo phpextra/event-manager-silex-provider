@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2edf54e20cef00cd9a3f5d4bd6b2699c",
+    "hash": "8e716739bae4e3c8827d01a1f2996940",
     "packages": [
         {
             "name": "phpextra/collection",
@@ -109,12 +109,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpextra/event-manager.git",
-                "reference": "2fc2501fd214fe47ee40548fb36464a7e1d7c70a"
+                "reference": "6c3fbf936ab8a4c2acad1e27e5f7bbac0820c571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpextra/event-manager/zipball/2fc2501fd214fe47ee40548fb36464a7e1d7c70a",
-                "reference": "2fc2501fd214fe47ee40548fb36464a7e1d7c70a",
+                "url": "https://api.github.com/repos/phpextra/event-manager/zipball/6c3fbf936ab8a4c2acad1e27e5f7bbac0820c571",
+                "reference": "6c3fbf936ab8a4c2acad1e27e5f7bbac0820c571",
                 "shasum": ""
             },
             "require": {
@@ -156,7 +156,7 @@
                 "observer",
                 "psr-0"
             ],
-            "time": "2014-10-27 21:53:58"
+            "time": "2014-10-28 22:12:53"
         },
         {
             "name": "phpextra/sorter",
@@ -742,6 +742,53 @@
                 "url"
             ],
             "time": "2014-10-26 07:41:27"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Stopwatch",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Stopwatch.git",
+                "reference": "f7cca9c342ce395d2aa17383d0f9a409d81ca585"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/f7cca9c342ce395d2aa17383d0f9a409d81ca585",
+                "reference": "f7cca9c342ce395d2aa17383d0f9a409d81ca585",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Stopwatch Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-09-22 11:59:59"
         }
     ],
     "packages-dev": [
