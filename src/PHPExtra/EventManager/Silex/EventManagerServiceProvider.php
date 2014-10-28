@@ -2,7 +2,6 @@
 
 namespace PHPExtra\EventManager\Silex;
 
-use PHPExtra\EventManager\EventManager;
 use Psr\Log\NullLogger;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
