@@ -68,7 +68,7 @@ class CustomEventDispatcher extends EventDispatcher implements EventManagerAware
     /**
      * {@inheritdoc}
      */
-    public function setEventManager(EventManager $manager)
+    public function setEventManager(EventManagerInterface $manager)
     {
         $this->eventManager = $manager;
 
