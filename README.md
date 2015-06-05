@@ -1,4 +1,12 @@
-#EventManager service provider for Silex (1.2)
+#EventManager provider for Silex
+
+[![Latest Stable Version](https://poser.pugx.org/phpextra/event-manager/v/stable.svg)](https://packagist.org/packages/phpextra/event-manager-silex-provider)
+[![Total Downloads](https://poser.pugx.org/phpextra/event-manager-silex-provider/downloads.svg)](https://packagist.org/packages/phpextra/event-manager-silex-provider)
+[![License](https://poser.pugx.org/phpextra/event-manager-silex-provider/license.svg)](https://packagist.org/packages/phpextra/event-manager-silex-provider)
+[![Build Status](http://img.shields.io/travis/phpextra/event-manager-silex-provider.svg)](https://travis-ci.org/phpextra/event-manager-silex-provider)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/phpextra/event-manager-silex-provider/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/phpextra/event-manager-silex-provider/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/phpextra/event-manager-silex-provider/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/phpextra/event-manager-silex-provider/?branch=3.0)
+[![GitTip](http://img.shields.io/gittip/jkobus.svg)](https://www.gittip.com/jkobus)
 
 No configuration is needed.
 
