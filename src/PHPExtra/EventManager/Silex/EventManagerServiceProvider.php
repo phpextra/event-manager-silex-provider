@@ -2,9 +2,10 @@
 
 namespace PHPExtra\EventManager\Silex;
 
-use PHPExtra\EventManager\EventManager;
+use Psr\Log\NullLogger;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
  * The SilexProvider class
@@ -20,38 +21,38 @@ class EventManagerServiceProvider implements ServiceProviderInterface
     {
         $app['dispatcher_class'] = 'PHPExtra\\EventManager\\Silex\\CustomEventDispatcher';
 
-        $app['event_manager'] = $app->share(
-            function (Application $app) {
-                $em = new EventManager();
+        $app['event_manager'] = $app->share(function (Application $app) {
 
-                if ($app['debug'] == true) {
-                    $em->setThrowExceptions(true);
-                }
+            $em = new ProfilableEventManager();
 
-                if ($app['logger'] !== null) {
-                    $em->setLogger($app['logger']);
-                }
-
-                return $em;
+            if ($app['logger'] !== null) {
+                $em->setLogger($app['logger']);
+            }else{
+                $em->setLogger(new NullLogger());
             }
-        );
 
-        $app['event_manager.proxy_mapper'] = $app->share(
-            function (Application $app) {
-                return new ProxyMapper();
+            if($app['debug']){
+                $em
+                    ->setStopwatch($app['stopwatch'])
+                    ->setThrowExceptions($app['debug'])
+                ;
+            }else{
+                $em->setStopwatch(new NullStopwatch());
             }
-        );
 
-        $app->extend(
-            'dispatcher',
-            function (CustomEventDispatcher $dispatcher, Application $app) {
-                $dispatcher
-                    ->setProxyMapper($app['event_manager.proxy_mapper'])
-                    ->setEventManager($app['event_manager']);
+            return $em;
+        });
 
-                return $dispatcher;
-            }
-        );
+        $app->extend('dispatcher', function (CustomEventDispatcher $dispatcher, Application $app) {
+            $dispatcher->setEventManager($app['event_manager']);
+            return $dispatcher;
+        });
+
+        if(!isset($app['stopwatch'])){
+            $app['stopwatch'] = $app->share(function () {
+                return new Stopwatch();
+            });
+        }
     }
 
     /**
