@@ -43,22 +43,16 @@ class EventManagerServiceProvider implements ServiceProviderInterface
             return $em;
         });
 
-        $app['event_manager.proxy_mapper'] = $app->share(function (Application $app) {
-            return new ProxyMapper();
-        });
-
         $app->extend('dispatcher', function (CustomEventDispatcher $dispatcher, Application $app) {
-            $dispatcher
-                ->setProxyMapper($app['event_manager.proxy_mapper'])
-                ->setEventManager($app['event_manager'])
-            ;
-
+            $dispatcher->setEventManager($app['event_manager']);
             return $dispatcher;
         });
 
-        $app['stopwatch'] = $app->share(function () {
-            return new Stopwatch();
-        });
+        if(!isset($app['stopwatch'])){
+            $app['stopwatch'] = $app->share(function () {
+                return new Stopwatch();
+            });
+        }
     }
 
     /**

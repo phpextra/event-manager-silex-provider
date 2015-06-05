@@ -4,11 +4,50 @@ No configuration is needed.
 
 This provider will replace your EventDispatcher class.
 Default Symfony events were not removed and have higher priority.
-It means that PHPExtra event is always running after Symfony events.
+It means that PHPExtra event is always running after Symfony event.
 
-Below is a reference, to see how events from PHPExtra are mapped onto vanilla sf events.
-All events are cancellable (propagationStop property in sf event).
+All events are cancellable using propagation flag set in symfony event.
+Event will be triggered even if propagation will be stopped. 
+To see if event was cancelled, use `SilexEvent::isCancelled()` before taking any action.
+
 **Unlike in Symfony, cancellable events are still sent to all listeners**.
+
+##Installation and usage
+
+If you are using logger, it will be automatically injected into the event manager.
+Every class can now be a listener.
+
+```php
+#bootstrap.php
+
+$app = new Silex\Application(array('debug' => true));
+$app->register(new \PHPExtra\EventManager\Silex\EventManagerProvider());
+
+
+$em = $app['event_manager'];
+
+$em->addListener(new \PHPExtra\EventManager\Listener\AnonymousListener(function(SilexEvent $event){
+    echo "Im in some Symfony KernelEvent !";
+}));
+
+$em->addListener($app['my_controller']);
+$em->addListener($app['mailer']);
+
+# etc ...
+```
+
+##Exception handling
+
+Exceptions that will occur during an event are suppressed in production mode and **will not brake the event loop**.
+In development, the event manager will break the event loop and throw an exception.
+
+```php
+$em->setThrowExceptions(false); // suppress exceptions and continue event loop
+```
+
+##Integration with profiler and symfony's Stopwatch component
+
+Stopwatch is enabled when debug mode is on. In production EventManager uses NullStopwatch.
 
 ## Symfony event mapping
 
@@ -38,44 +77,6 @@ PHPExtra\EventManager\Silex\Event\PostResponseEvent
 Symfony\Component\HttpKernel\Event\PostResponseEvent
 ```
 
-##Installation and usage
-
-If you are using logger, it will be automatically injected into the event manager.
-Every class can now be a listener.
-
-```php
-$app = new Silex\Application(array('debug' => true));
-$app->register(new \PHPExtra\EventManager\Silex\EventManagerProvider());
-
-$em = $app['event_manager'];
-
-$em->addListener(new \PHPExtra\EventManager\Listener\AnonymousListener(function(RequestEvent $event){
-    echo "Im in RequestEvent (Sf GetResponseEvent)";
-}));
-
-$em->addListener(new \PHPExtra\EventManager\Listener\AnonymousListener(function(SilexKernelEvent $event){
-    echo "Im in some Symfony KernelEvent !";
-}));
-
-$em->addListener($app['my_controller']);
-
-$em->addListener($app['mailer']);
-...
-```
-
-##Exception handling
-
-Exceptions that will occur during an event are suppressed in production mode.
-In development, the event manager will break the event loop and throw an exception.
-
-```php
-$em->setThrowExceptions(false); // suppress exceptions and continue event loop
-```
-
-##Profiling (Symfony stopwatch)
-
-Stopwatch is enabled when debug mode is on. In production EventManager uses NullStopwatch.
-
 ##Contributing
 
 All code contributions must go through a pull request.
@@ -83,10 +84,6 @@ Fork the project, create a feature branch, and send me a pull request.
 To ensure a consistent code base, you should make sure the code follows
 the [coding standards](http://symfony.com/doc/2.0/contributing/code/standards.html).
 If you would like to help take a look at the list of issues.
-
-##Requirements
-
-See **composer.json** for a full list of dependencies.
 
 ##Authors
 

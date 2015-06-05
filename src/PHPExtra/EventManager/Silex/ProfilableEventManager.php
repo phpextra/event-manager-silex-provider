@@ -14,7 +14,7 @@ use PHPExtra\EventManager\Worker\WorkerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
- * Adds Symfony Stopwatch
+ * The ProfilableEventManager class
  *
  * @author Jacek Kobus <kobus.jacek@gmail.com>
  */

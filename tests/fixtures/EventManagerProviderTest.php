@@ -4,10 +4,12 @@ namespace fixtures;
 
 use PHPExtra\EventManager\EventManagerInterface;
 use PHPExtra\EventManager\Listener\AnonymousListener;
-use PHPExtra\EventManager\Silex\Event\SilexEvent;
 use PHPExtra\EventManager\Silex\EventManagerServiceProvider;
+use PHPExtra\EventManager\Silex\SilexEvent;
 use Silex\Application;
 use Silex\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 
 /**
@@ -50,12 +52,10 @@ class EventManagerProviderTest extends WebTestCase
         $this->assertEquals('ok', $client->getResponse()->getContent());
     }
 
-    public function testListenersAreTriggeredInCorrectOrder()
+    public function testRunApplicationWithListenersReturnsValidResponse()
     {
-        $queue = array();
-
         $listener = new AnonymousListener(function(SilexEvent $event) use (&$queue){
-            $queue[] = get_class($event);
+            $queue[] = $event->getName();
         });
 
         $this->getEventManager()->addListener($listener);
@@ -63,12 +63,48 @@ class EventManagerProviderTest extends WebTestCase
         $client = $this->createClient();
         $client->request('GET', '/');
 
-        $this->assertEquals('PHPExtra\EventManager\Silex\Event\RequestEvent',       $queue[0]);
-        $this->assertEquals('PHPExtra\EventManager\Silex\Event\PreDispatchEvent',   $queue[1]);
-        $this->assertEquals('PHPExtra\EventManager\Silex\Event\PostDispatchEvent',  $queue[2]);
-        $this->assertEquals('PHPExtra\EventManager\Silex\Event\ResponseEvent',      $queue[3]);
-        $this->assertEquals('PHPExtra\EventManager\Silex\Event\PostRequestEvent',   $queue[4]);
-        $this->assertEquals('PHPExtra\EventManager\Silex\Event\PostResponseEvent',  $queue[5]);
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertEquals('ok', $client->getResponse()->getContent());
+    }
 
+    public function testDefaultSymfonyEventsAreTriggeredInCorrectOrder()
+    {
+        $expected = array(
+            'kernel.request',
+            'kernel.controller',
+            'kernel.view',
+            'kernel.response',
+            'kernel.finish_request',
+            'kernel.terminate',
+        );
+
+        $queue = array();
+
+        $listener = new AnonymousListener(function(SilexEvent $event) use (&$queue){
+            $queue[] = $event->getName();
+        });
+
+        $this->getEventManager()->addListener($listener);
+        $this->createClient()->request('GET', '/');
+
+        $this->assertEquals($expected, $queue);
+
+    }
+
+    public function testResponseCanBeAlteredUsingEvents()
+    {
+        $listener = new AnonymousListener(function(SilexEvent $event) use (&$queue){
+            $sfEvent = $event->getSymfonyEvent();
+
+            if($sfEvent instanceof GetResponseEvent){
+                $sfEvent->setResponse(new Response('Response from event listener !'));
+            }
+        });
+        $this->getEventManager()->addListener($listener);
+
+        $client = $this->createClient();
+        $client->request('GET', '/');
+
+        $this->assertEquals($client->getResponse()->getContent(), 'Response from event listener !');
     }
 }
